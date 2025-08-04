@@ -3,6 +3,8 @@
 ## Overview
 This project provides a lightweight web user interface (UI) that enables seamless pulling, management, and execution of Ollama models as well as support for running any compatible AI model you prefer. It is designed to be simple and intuitive, making it easy to experiment with and deploy AI models locally or remotely.
 
+<img width="1721" height="897" alt="image" src="https://github.com/user-attachments/assets/3f8b42fc-8fad-4fa9-8fab-776ddfb9a800" />
+
 ## Features
 - Pull Ollama AI models effortlessly from available repositories
 - Manage multiple AI models through a clean web interface
