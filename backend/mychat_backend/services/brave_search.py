@@ -1,5 +1,6 @@
 import os
 import requests
+import logging
 
 BRAVE_API_KEY = os.getenv("BRAVE_API_KEY")
 
@@ -28,6 +29,6 @@ def perform_brave_search(query: str, count: int = 10):
             return "\n\n".join(snippets) if snippets else "No results found from Brave."
         return "No search results found."
     except requests.RequestException as e:
-        print(f"Error during Brave search: {e}")
+        logging.error(f"Error during Brave search: {e}")
         return "Error fetching results from Brave API."
 
