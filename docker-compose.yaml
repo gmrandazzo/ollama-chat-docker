@@ -12,15 +12,36 @@ services:
       - ollama_data:/root/.ollama
     ports:
       - "11434:11434"
+    networks:
+      - mychat-network
+    environment:
+      OLLAMA_ORIGINS: "http://localhost:8085,http://127.0.0.1:8085"
     container_name: ollama
-
-  web-ui:
-    build: ./web-ui
+  rag_backend:
+    build: ./backend
     ports:
-      - "8085:80"
+      - "5000:8000"
+    environment:
+      BRAVE_API_KEY: ${BRAVE_API_KEY} # Read from your host's .env or shell env
+      OLLAMA_HOST: http://ollama:11434 # Internal Docker network name and port for Ollama
+    networks:
+      - mychat-network
     depends_on:
       - ollama
-    container_name: ollama-webui
+    container_name: mychat-backend
+  frontend:
+    build: ./frontend
+    ports:
+      - "8085:80"
+    networks:
+      - mychat-network
+    depends_on:
+      - ollama
+    container_name: mychat-frontend
 
 volumes:
   ollama_data:
+
+networks:
+  mychat-network:
+    driver: bridge

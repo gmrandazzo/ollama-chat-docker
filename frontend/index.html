@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ollama Docker Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-header">
+        <div class="header-group">
+            <label for="model-select">Active Model</label>
+            <select id="model-select"></select>
+        </div>
+        <div class="header-group">
+            <label for="pull-model-input">Pull a New Model</label>
+            <div id="pull-controls">
+                <input type="text" id="pull-model-input" placeholder="e.g., phi3">
+                <button id="pull-model-btn">Pull</button>
+            </div>
+        </div>
+        <div class="header-group">
+            <input type="checkbox" id="rag-toggle" checked>
+            <label for="rag-toggle">Enable RAG (Search Web)</label>
+        </div>
+    </div>
+    <pre id="pull-status"></pre>
+    <div id="rag-status" style="display: none;">Searching the web... <span class="loader"></span></div>
+
+    <div id="chat-container">
+        <div id="chat-window">
+            <!-- Messages appear here -->
+        </div>
+        <div id="chat-form-container">
+            <form id="chat-form">
+                <textarea id="prompt-input" placeholder="Message Ollama..." rows="1"></textarea>
+                <button id="send-btn" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Load API functions first -->
+    <script type="module" src="api.js"></script>
+    <!-- Then load app logic that uses API functions -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

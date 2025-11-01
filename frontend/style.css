@@ -1,0 +1,189 @@
+/* ... (existing styles from before) ... */
+:root {
+    --bg-color: #282c34;
+    --chat-bg: #343541;
+    --user-msg-bg: #3a5a97;
+    --ai-msg-bg: #444654;
+    --text-color: #d1d5db;
+    --input-bg: #40414f;
+    --border-color: #565869;
+    --header-bg: #343541;
+}
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
+    margin: 0; 
+    display: flex; 
+    flex-direction: column; 
+    height: 100vh; 
+}
+#app-header { 
+    background-color: var(--header-bg); 
+    padding: 10px 20px; 
+    border-bottom: 1px solid var(--border-color); 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 15px; 
+    align-items: center; 
+}
+.header-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px; 
+}
+.header-group label { 
+    font-size: 0.8em; 
+    color: #a0a4ab; 
+}
+#model-select { 
+    background-color: var(--input-bg); 
+    color: var(--text-color); 
+    border: 1px solid var(--border-color); 
+    border-radius: 6px; 
+    padding: 8px; 
+    font-size: 14px; 
+}
+#pull-controls { 
+    display: flex; 
+    gap: 10px; 
+}
+#pull-model-input { 
+    background-color: var(--input-bg); 
+    border: 1px solid var(--border-color); 
+    border-radius: 6px; 
+    padding: 8px; 
+    color: var(--text-color); 
+}
+#pull-model-btn { 
+    background-color: #565869; 
+    color: white; 
+    border: none; 
+    border-radius: 6px; 
+    padding: 8px 12px; 
+    cursor: pointer; 
+}
+#pull-model-btn:hover { 
+    background-color: #676a79; 
+}
+#pull-status { 
+    background-color: #1e1f22; 
+    color: #ccc; 
+    padding: 10px; 
+    margin-top: 10px; 
+    border-radius: 6px; 
+    font-family: monospace; 
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+    max-height: 150px; 
+    overflow-y: auto; 
+    display: none; 
+}
+#rag-status {
+    background-color: #1e1f22;
+    color: #a0a4ab;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 6px;
+    max-width: 800px;
+    text-align: center;
+}
+
+#chat-container { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    max-width: 800px; 
+    width: 100%; 
+    margin: 0 auto; 
+    overflow: hidden; 
+}
+#chat-window { 
+    flex: 1; 
+    overflow-y: auto; 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+}
+/* Firefox specific scrollbar styles */
+#chat-window { 
+    scrollbar-width: thin; 
+    scrollbar-color: var(--border-color) var(--bg-color); 
+}
+/* Webkit scrollbar styles (Chrome) */
+#chat-window::-webkit-scrollbar { 
+    width: 8px; 
+}
+#chat-window::-webkit-scrollbar-track { 
+    background: var(--bg-color); 
+}
+#chat-window::-webkit-scrollbar-thumb { 
+    background-color: var(--border-color); 
+    border-radius: 4px; 
+}
+.message { 
+    padding: 15px; 
+    border-radius: 10px; 
+    max-width: 85%; 
+    line-height: 1.5; 
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+}
+.user-message { 
+    background-color: var(--user-msg-bg); 
+    align-self: flex-end; 
+    color: white; 
+}
+.ai-message { 
+    background-color: var(--ai-msg-bg); 
+    align-self: flex-start; 
+}
+#chat-form-container { 
+    padding: 0 20px 20px 20px; 
+}
+#chat-form { 
+    display: flex; 
+    gap: 10px; 
+    border-top: 1px solid var(--border-color); 
+    padding-top: 20px; 
+}
+#prompt-input { 
+    flex: 1; 
+    padding: 12px; 
+    background-color: var(--input-bg); 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px; 
+    color: var(--text-color); 
+    font-size: 16px; 
+    resize: none; 
+}
+#prompt-input:focus { 
+    outline: none; 
+    border-color: var(--user-msg-bg); 
+}
+#send-btn { 
+    padding: 0 20px; 
+    background-color: var(--user-msg-bg); 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    cursor: pointer; 
+}
+#send-btn:disabled { 
+    background-color: #565869; 
+    cursor: not-allowed; 
+}
+.loader { 
+    width: 1.2em; 
+    height: 1.2em; 
+    display: inline-block; 
+    animation: spin 1s linear infinite; 
+    border: 3px solid rgba(255, 255, 255, 0.3); 
+    border-top-color: #fff; 
+    border-radius: 50%; 
+}
+@keyframes spin { 
+    to { transform: rotate(360deg); } 
+}
