@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse
 from pydantic import BaseModel, Field
-from services.brave_search import perform_brave_search
+from mychat_backend.services.brave_search import perform_brave_search
 
 router = APIRouter()
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
@@ -18,6 +18,24 @@ class RagChatRequest(BaseModel):
     model: str = Field(..., description="The language model to use, e.g. 'llama2'")
     userQuery: str = Field(..., description="User's query to be sent for RAG processing")
     messages: List[Message] = Field(..., description="List of message history for context")
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "model": "qwen3:4b",
+                "userQuery": "Who is Giuseppe Marco Randazzo what he has accomplished as of today?",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You are a helpful assistant that summarizes conversations."
+                    },
+                    {
+                        "role": "user",
+                        "content": "Tell me about Giuseppe Marco Randazzo."
+                    }
+                ]
+            }
+        }
+    }
 
 @router.post("/rag-chat", response_class=StreamingResponse, summary="Chat with Retrieval-Augmented Generation",
              description="Send a user query with contextual message history, "

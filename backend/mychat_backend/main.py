@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from endpoints.rag_chat import router as rag_router
+from mychat_backend.endpoints.rag_chat import router as rag_router
 
 # Load env variables
 load_dotenv()
