@@ -1,0 +1,42 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama-greenboost
+    # Added shared memory allocation
+    shm_size: '8gb'
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    devices:
+      - "/dev/greenboost:/dev/greenboost"
+    environment:
+      # Core GreenBoost & Cache settings
+      - LD_PRELOAD=/usr/local/lib/libgreenboost_cuda.so
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_KV_CACHE_TYPE=q8_0
+      
+      # Optimized Performance Tuning
+      - OLLAMA_NUM_CTX=32768
+      - OLLAMA_GPU_OVERHEAD=268435456
+      - OLLAMA_MAX_QUEUE=1
+      - OLLAMA_KEEP_ALIVE=-1
+      - OLLAMA_NUM_THREADS=8
+      - GREENBOOST_VRAM_HEADROOM_MB=2048
+      - GREENBOOST_DEBUG=0
+    volumes:
+      - /usr/local/lib/libgreenboost_cuda.so:/usr/local/lib/libgreenboost_cuda.so
+      - /mnt/data/ollama-chat-docker/data:/root/.ollama
+    ports:
+      - "11434:11434"
+
+  web-ui:
+    build: ./web-ui
+    ports:
+      - "8085:80"
+    depends_on:
+      - ollama
+    container_name: ollama-webui

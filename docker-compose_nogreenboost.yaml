@@ -9,7 +9,7 @@ services:
               count: 1
               capabilities: [gpu]
     volumes:
-      - ollama_data:/root/.ollama
+      - /mnt/data/ollama-chat-docker/data:/root/.ollama
     ports:
       - "11434:11434"
     container_name: ollama
